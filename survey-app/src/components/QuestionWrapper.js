@@ -3,6 +3,12 @@ import { QuestionForm } from "./QuestionForm";
 import { v4 as uuidv4 } from "uuid";
 import { Question } from "./Question";
 import { EditQuestionForm } from "./EditQuestionForm";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 uuidv4();
 
 export const QuestionWrapper = () => {
@@ -43,32 +49,58 @@ export const QuestionWrapper = () => {
   };
 
   return (
-    <div className="QuestionWrapper">
-      <h1>Let's Ask Us</h1>
+    <div>
+      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <div className="QuestionWrapper">
+          <h1>Let's Ask Us</h1>
 
-      {openForm ? (
-        <QuestionForm addQuestion={addQuestion} hideForm={hideForm} />
-      ) : (
-        <button
-          type="submit"
-          className="question-btn"
-          onClick={() => setOpenForm(true)}
-        >
-          Add Question
-        </button>
-      )}
-      {questions.map((ask) =>
-        ask.isEditing ? (
-          <EditQuestionForm editQuestion={editAsk} ask={ask} />
-        ) : (
-          <Question
-            key={ask.id}
-            ask={ask}
-            deleteQuestion={deleteQuestion}
-            editQuestion={editQuestion}
-          />
-        )
-      )}
+          {openForm ? (
+            <QuestionForm addQuestion={addQuestion} hideForm={hideForm} />
+          ) : (
+            <button
+              type="submit"
+              className="question-btn"
+              onClick={() => setOpenForm(true)}
+            >
+              Add Question
+            </button>
+          )}
+
+          <div>
+            <SortableContext
+              items={questions}
+              strategy={verticalListSortingStrategy}
+            >
+              {questions.map((ask) =>
+                ask.isEditing ? (
+                  <EditQuestionForm editQuestion={editAsk} ask={ask} />
+                ) : (
+                  <Question
+                    key={ask.id}
+                    ask={ask}
+                    deleteQuestion={deleteQuestion}
+                    editQuestion={editQuestion}
+                  />
+                )
+              )}
+            </SortableContext>
+          </div>
+        </div>
+      </DndContext>
     </div>
   );
+
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if(active.ask !== over.ask) {
+      setQuestions((item) => {
+        const activeIndex = item.indexOf(active.id)
+        const overIndex = item.indexOf(over.id)
+        console.log(arrayMove(item, activeIndex, overIndex));
+        arrayMove(item, activeIndex, overIndex)
+      })
+    }
+
+  }
 };

@@ -48,7 +48,7 @@ export const QuestionForm = ({ addQuestion, hideForm }) => {
       )}
 
       <button type="submit" className="submit-btn">
-        Add Question
+        Submit Question
       </button>
     </form>
   );

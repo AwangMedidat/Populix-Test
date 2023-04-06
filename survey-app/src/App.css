@@ -113,6 +113,11 @@ select:focus {
     width: 200px;
   }
 
+  .submit-btn {
+    margin-bottom: 20px;
+    width: 200px;
+  }
+
   .question-input {
     width: 200px;
   }
