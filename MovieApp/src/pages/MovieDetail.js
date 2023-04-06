@@ -8,13 +8,13 @@ import {
   Linking,
 } from 'react-native';
 import {GET} from '../services/api';
-import Loader from './Loader';
+import Loader from '../components/Loader';
 import {IMAGE_POSTER_URL} from '../config';
-import Styles from '../styles';
+import Styles from '../style/styles';
 import Icon from 'react-native-vector-icons/Entypo';
-import Constants from '../Constants';
-import TrendingPeople from './TrendingPeople';
-import TrendingMovie from './TrendingMovie';
+import Constants from '../style/constants';
+import TrendingPeople from '../components/TrendingPeople';
+import TrendingMovie from '../components/TrendingMovie';
 
 const MovieDetail = props => {
   const [loading, setLoading] = useState(true);

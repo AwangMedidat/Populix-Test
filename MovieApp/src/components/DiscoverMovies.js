@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {GET} from '../services/api';
 import {SliderBox} from 'react-native-image-slider-box';
 import {IMAGE_POSTER_URL} from '../config';
-import Constants from '../Constants';
+import Constants from '../style/constants';
 
 const DiscoverMovies = (props) => {
   const [movies, setMovies] = useState([]);

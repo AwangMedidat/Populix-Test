@@ -1,12 +1,12 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import Constants from './Constants';
+import constants from './constants';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
 const Styles = StyleSheet.create({
   sectionBg: {
-    backgroundColor: Constants.baseColor,
+    backgroundColor: constants.baseColor,
     height: deviceHeight,
   },
   trendingPeopleImage: {
@@ -16,7 +16,7 @@ const Styles = StyleSheet.create({
   },
   trendingPeopleName: {
     width: 60,
-    color: Constants.textColor,
+    color: constants.textColor,
     fontSize: 12,
     textAlign: 'center',
     marginTop: 10,
@@ -26,7 +26,7 @@ const Styles = StyleSheet.create({
   },
   heading: {
     fontSize: 19,
-    color: Constants.fadedColor,
+    color: constants.fadedColor,
     margin: 10,
   },
   posterImage: {
@@ -35,7 +35,7 @@ const Styles = StyleSheet.create({
     borderRadius: 10,
   },
   movieTitle: {
-    color: Constants.textColor,
+    color: constants.textColor,
     width: 150,
     textAlign: 'center',
     marginTop: 5,
@@ -47,12 +47,12 @@ const Styles = StyleSheet.create({
   },
   detailMovieTitle: {
     fontSize: 28,
-    color: Constants.textColor,
+    color: constants.textColor,
     textAlign: 'center',
     marginTop: -40,
   },
   linkContainer: {
-    backgroundColor: Constants.secondaryColor,
+    backgroundColor: constants.secondaryColor,
     borderRadius: 100,
     padding: 10,
     width: 45,
@@ -60,13 +60,13 @@ const Styles = StyleSheet.create({
     marginTop: -20,
   },
   overview: {
-    color: Constants.textColor,
+    color: constants.textColor,
     marginHorizontal: 10,
     textAlign: 'justify',
     fontSize: 16,
   },
   details: {
-    color: Constants.secondaryColor,
+    color: constants.secondaryColor,
     fontSize: 15,
     marginLeft: 10,
     fontWeight: 'bold',
@@ -80,13 +80,13 @@ const Styles = StyleSheet.create({
   genreContainer: {
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: Constants.textColor,
+    borderColor: constants.textColor,
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginHorizontal: 10,
   },
   genre: {
-    color: Constants.textColor,
+    color: constants.textColor,
     fontSize: 16,
   },
   viewGenre : {

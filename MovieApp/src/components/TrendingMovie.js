@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import {GET} from '../services/api';
-import Styles from '../styles';
+import Styles from '../style/styles';
 import {POSTER_IMAGE} from '../config';
 import Loader from './Loader';
 

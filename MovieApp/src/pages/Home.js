@@ -1,9 +1,9 @@
 import {View, Text, ScrollView} from 'react-native';
 import React from 'react';
-import DiscoverMovies from './components/DiscoverMovies';
-import Styles from './styles';
-import TrendingPeople from './components/TrendingPeople';
-import TrendingMovie from './components/TrendingMovie';
+import DiscoverMovies from '../components/DiscoverMovies';
+import Styles from '../style/styles';
+import TrendingPeople from '../components/TrendingPeople';
+import TrendingMovie from '../components/TrendingMovie';
 
 const Home = props => {
   return (

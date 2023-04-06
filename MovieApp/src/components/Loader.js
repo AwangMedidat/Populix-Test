@@ -1,6 +1,6 @@
 import { View, Text, ActivityIndicator } from 'react-native'
 import React from 'react'
-import Constants from '../Constants'
+import Constants from '../style/constants'
 
 const Loader = () => {
   return (
