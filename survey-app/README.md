@@ -1,6 +1,6 @@
 # Getting Started this Project
 
-After Clone the Repository, `cd survey-app`
+After Clone the Repository, `cd survey-app/`
 
 ## Available Scripts
 
