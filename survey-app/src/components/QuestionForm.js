@@ -5,11 +5,10 @@ export const QuestionForm = ({ addQuestion, hideForm }) => {
   const [answer, setAnswer] = useState("");
   const [option, setOption] = useState("");
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     addQuestion(value);
-    hideForm(false)
+    hideForm(false);
     setValue("");
   };
 

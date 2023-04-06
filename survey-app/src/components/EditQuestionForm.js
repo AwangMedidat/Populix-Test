@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-export const EditQuestionForm = ({editQuestion, ask}) => {
+export const EditQuestionForm = ({ editQuestion, ask }) => {
   const [value, setValue] = useState(ask.ask);
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    editQuestion(value, ask.id)
-    setValue("")
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    editQuestion(value, ask.id);
+    setValue("");
+  };
 
   return (
     <form className="QuestionForm" onSubmit={handleSubmit}>

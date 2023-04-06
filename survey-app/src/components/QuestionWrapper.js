@@ -27,6 +27,7 @@ export const QuestionWrapper = () => {
   };
 
   const editQuestion = (id) => {
+    console.log(id, "<<< id");
     setQuestions(
       questions.map((ask) =>
         ask.id === id ? { ...ask, isEditing: !ask.isEditing } : ask
@@ -93,14 +94,12 @@ export const QuestionWrapper = () => {
   function handleDragEnd(event) {
     const { active, over } = event;
 
-    if(active.ask !== over.ask) {
-      setQuestions((item) => {
-        const activeIndex = item.indexOf(active.id)
-        const overIndex = item.indexOf(over.id)
-        console.log(arrayMove(item, activeIndex, overIndex));
-        arrayMove(item, activeIndex, overIndex)
-      })
+    if (active.id !== over.id) {
+      setQuestions((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+        return arrayMove(items, oldIndex, newIndex);
+      });
     }
-
   }
 };
