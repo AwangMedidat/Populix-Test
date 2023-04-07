@@ -1,40 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
-import {GET} from '../services/api';
+import React, {useEffect} from 'react';
+import {View} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
-import {IMAGE_POSTER_URL} from '../config';
 import Constants from '../style/constants';
+import { useSelector, useDispatch } from 'react-redux'
+import { getMovies, getImages } from '../redux/actions'
 
-const DiscoverMovies = (props) => {
-  const [movies, setMovies] = useState([]);
-  const [images, setImages] = useState([]);
+const DiscoverMovies = props => {
+  const { movies } = useSelector(state => state.movieReducers)
+  const { images } = useSelector(state => state.imageReducers)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getMovies = async () => {
-      const response = await GET('/discover/movie');
-      setMovies(response.results);
-
-      const images = response.results.map(
-        data => `${IMAGE_POSTER_URL}${data.backdrop_path}`,
-      );
-
-      let backImages = [];
-      for (let i = 0; i < 10; i++) {
-        backImages = [...backImages, images[i]];
-      }
-
-      setImages(backImages);
-    };
-
-    getMovies();
-  }, []);
+    dispatch(getMovies())
+    dispatch(getImages())
+  }, [dispatch]);
 
   return (
     <View>
       <SliderBox
         images={images}
         dotColor={Constants.secondaryColor}
-        onCurrentImagePressed={index => props.navigation.navigate('MovieDetail', {movieId: movies[index].id})}
+        onCurrentImagePressed={index =>
+          props.navigation.navigate('MovieDetail', {movieId: movies[index].id})
+        }
       />
     </View>
   );

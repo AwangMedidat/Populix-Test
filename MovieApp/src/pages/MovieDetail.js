@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
-import {GET} from '../services/api';
 import Loader from '../components/Loader';
 import {IMAGE_POSTER_URL} from '../config';
 import Styles from '../style/styles';
@@ -15,28 +14,16 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Constants from '../style/constants';
 import TrendingPeople from '../components/TrendingPeople';
 import TrendingMovie from '../components/TrendingMovie';
+import { useSelector, useDispatch } from 'react-redux'
+import { getDetails } from '../redux/actions'
 
 const MovieDetail = props => {
-  const [loading, setLoading] = useState(true);
-  const [detail, setDetail] = useState();
+  const { detail, loading } = useSelector(state => state.movieReducers)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getDetail = async () => {
-      const data = await GET(`/movie/${props.route.params.movieId}`);
-      setDetail(data);
-      setLoading(false);
-    };
-
-    getDetail();
-  }, []);
-
-  const getGenre = () => {
-    return detail.genres.map(genre => (
-      <View style={Styles.genreContainer}>
-        <Text style={Styles.genre}>{genre.name}</Text>
-      </View>
-    ));
-  };
+    dispatch(getDetails(props.route.params.movieId))
+  }, [dispatch]);
 
   return (
     <ScrollView style={Styles.sectionBg}>
@@ -95,14 +82,14 @@ const MovieDetail = props => {
 
           <TrendingPeople
             title="CAST"
-            url={`/movie/${props.route.params.movieId}/credits`}
             isForPage="details"
+            idmovie={`${props.route.params.movieId}`}
           />
 
           <TrendingMovie
             title="SIMILAR MOVIES"
             navigation={props.navigation}
-            url={`/movie/${props.route.params.movieId}/similar`}
+            idmovie={`${props.route.params.movieId}`}
           />
         </View>
       )}

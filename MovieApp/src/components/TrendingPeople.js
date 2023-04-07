@@ -1,23 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect } from 'react';
 import {View, Text, FlatList, Image} from 'react-native';
-import {GET} from '../services/api';
 import Styles from '../style/styles';
 import {IMAGE_POSTER_URL} from '../config';
 import Loader from './Loader';
+import { useSelector, useDispatch } from 'react-redux'
+import { getPeoples } from '../redux/actions'
 
 const TrendingPeople = props => {
-  const [loading, setLoading] = useState(true);
-  const [people, setPeople] = useState([]);
+  const { loading, peoples } = useSelector(state => state.peopleReducers)
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
-    const getPeople = async () => {
-      const data = await GET(props.url);
-      setPeople(props.isForPage === 'details' ? data.cast : data.results);
-      setLoading(false);
-    };
-
-    getPeople();
-  }, []);
+    dispatch(getPeoples(props.isForPage, props.idmovie))
+  }, [dispatch]);
 
   return (
     <View>
@@ -28,7 +24,7 @@ const TrendingPeople = props => {
           <Text style={Styles.heading}>{props.title}</Text>
           <FlatList
             keyExtractor={item => item.id}
-            data={people}
+            data={peoples}
             renderItem={displayPeople}
             horizontal
           />

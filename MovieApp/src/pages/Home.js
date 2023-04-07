@@ -1,4 +1,4 @@
-import {View, Text, ScrollView} from 'react-native';
+import {ScrollView} from 'react-native';
 import React from 'react';
 import DiscoverMovies from '../components/DiscoverMovies';
 import Styles from '../style/styles';
@@ -9,8 +9,8 @@ const Home = props => {
   return (
     <ScrollView style={Styles.sectionBg}>
       <DiscoverMovies navigation={props.navigation}/>
-      <TrendingPeople title="Trending People" url="/trending/person/week" />
-      <TrendingMovie title="Trending Movies" url="/movie/top_rated" navigation={props.navigation}/>
+      <TrendingPeople title="Trending People" />
+      <TrendingMovie title="Trending Movies" navigation={props.navigation}/>
     </ScrollView>
   );
 };

@@ -1,33 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
-import {GET} from '../services/api';
 import Styles from '../style/styles';
 import {POSTER_IMAGE} from '../config';
 import Loader from './Loader';
+import { useSelector, useDispatch } from 'react-redux'
+import { getTrendings } from '../redux/actions'
 
 const TrendingMovie = props => {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState();
+  const { loading, trendings } = useSelector(state => state.trendingReducers)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getMovies = async () => {
-      const data = await GET(props.url);
-      setMovies(data.results);
-      setLoading(false);
-    };
-
-    getMovies();
-  }, []);
+    dispatch(getTrendings(props.id))
+  }, [dispatch]);
   return (
     <View>
       {loading ? (
         <Loader />
       ) : (
         <View>
-          <Text style={Styles.heading}>Trending Movies</Text>
+          <Text style={Styles.heading}>{props.title}</Text>
           <FlatList
             keyExtractor={item => item.id}
-            data={movies}
+            data={trendings}
             horizontal
             renderItem={item => displayMovies(item, props)}
           />

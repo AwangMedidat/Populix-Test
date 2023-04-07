@@ -71,12 +71,6 @@ const Styles = StyleSheet.create({
     marginLeft: 10,
     fontWeight: 'bold',
   },
-//   detailsContainer: {
-//     display: 'flex',
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     marginVertical: 20,
-//   },
   genreContainer: {
     borderWidth: 1,
     borderRadius: 5,
