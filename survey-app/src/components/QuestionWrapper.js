@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { QuestionForm } from "./QuestionForm";
 import { v4 as uuidv4 } from "uuid";
 import { Question } from "./Question";
@@ -15,19 +15,34 @@ export const QuestionWrapper = () => {
   const [questions, setQuestions] = useState([]);
   const [openForm, setOpenForm] = useState(false);
 
-  const addQuestion = (question) => {
-    setQuestions([
+  useEffect(() => {
+    const savedQuestions = JSON.parse(localStorage.getItem("questions")) || [];
+    setQuestions(savedQuestions);
+  }, []);
+
+  const addQuestion = (question, option, otherAnswer) => {
+    const newQuestion = [
       ...questions,
-      { id: uuidv4(), ask: question, completed: false, isEditing: false },
-    ]);
+      {
+        id: uuidv4(),
+        ask: question,
+        optionAnswer: option,
+        otherAnswer: otherAnswer,
+        isEditing: false,
+      },
+    ];
+    setQuestions(newQuestion);
+    localStorage.setItem("questions", JSON.stringify(newQuestion));
   };
 
   const deleteQuestion = (id) => {
-    setQuestions(questions.filter((ask) => ask.id !== id));
+
+    const deletedQuestion = questions.filter((ask) => ask.id !== id)
+    setQuestions(deletedQuestion);
+    localStorage.setItem("questions", JSON.stringify(deletedQuestion));
   };
 
   const editQuestion = (id) => {
-    console.log(id, "<<< id");
     setQuestions(
       questions.map((ask) =>
         ask.id === id ? { ...ask, isEditing: !ask.isEditing } : ask
@@ -36,13 +51,13 @@ export const QuestionWrapper = () => {
   };
 
   const editAsk = (ask, id) => {
-    setQuestions(
-      questions.map((question) =>
-        question.id === id
-          ? { ...question, ask, isEditing: !question.isEditing }
-          : question
-      )
+    const updatedQuestion = questions.map((question) =>
+      question.id === id
+        ? { ...question, ask, isEditing: !question.isEditing }
+        : question
     );
+    setQuestions(updatedQuestion);
+    localStorage.setItem("questions", JSON.stringify(updatedQuestion));
   };
 
   const hideForm = (status) => {

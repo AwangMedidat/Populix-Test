@@ -7,7 +7,7 @@ export const QuestionForm = ({ addQuestion, hideForm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addQuestion(value);
+    addQuestion(value, option, answer);
     hideForm(false);
     setValue("");
   };
@@ -30,9 +30,9 @@ export const QuestionForm = ({ addQuestion, hideForm }) => {
         </option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
-        <option value="more">More Answer</option>
+        <option value="other">Other Answer</option>
       </select>
-      {option === "more" ? (
+      {option === "other" ? (
         <>
           <input
             type="text"
